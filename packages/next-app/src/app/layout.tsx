@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { StencilReloader } from "./components/StencilReloader";
 
 export const metadata: Metadata = {
-  title: "Stencil + Next.js Integration",
+  title: "Scoped SSR slot reproduction",
   description:
     "A minimal reproduction for testing Stencil components with Next.js",
 };
@@ -14,9 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body>
-        <StencilReloader />
         {children}
       </body>
     </html>

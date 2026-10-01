@@ -14,11 +14,10 @@
     "build": "pnpm run build:stencil && pnpm run build:react-wrapper && pnpm run build:next-app",
     "build:stencil": "pnpm --filter @example/stencil-lib run build",
     "build:react-wrapper": "pnpm --filter @example/stencil-lib-react run build",
-    "build:next-app": "pnpm --filter next-app run build"
+    "build:next-app": "pnpm --filter next-app run build",
+    "serve": "pnpm --filter next-app run start"
   },
   "devDependencies": {
-    "chokidar-cli": "^3.0.0",
-    "concurrently": "^9.0.0",
-    "wait-on": "^8.0.0"
+    "concurrently": "9.2.1"
   }
 }

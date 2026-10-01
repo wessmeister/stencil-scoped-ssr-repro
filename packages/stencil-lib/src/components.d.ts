@@ -6,91 +6,45 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface ExampleInput {
-        /**
-          * Whether the input is disabled
-          * @default false
-         */
-        "disabled": boolean;
-        /**
-          * Placeholder text for the input
-          * @default ''
-         */
-        "placeholder": string;
-        /**
-          * The current value of the input
-          * @default ''
-         */
-        "value": string;
+    interface ScopedChild {
     }
-}
-export interface ExampleInputCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLExampleInputElement;
+    interface SlotParent {
+    }
 }
 declare global {
-    interface HTMLExampleInputElementEventMap {
-        "exampleChange": string;
-        "exampleFocus": void;
-        "exampleBlur": void;
+    interface HTMLScopedChildElement extends Components.ScopedChild, HTMLStencilElement {
     }
-    interface HTMLExampleInputElement extends Components.ExampleInput, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLExampleInputElementEventMap>(type: K, listener: (this: HTMLExampleInputElement, ev: ExampleInputCustomEvent<HTMLExampleInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLExampleInputElementEventMap>(type: K, listener: (this: HTMLExampleInputElement, ev: ExampleInputCustomEvent<HTMLExampleInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    var HTMLScopedChildElement: {
+        prototype: HTMLScopedChildElement;
+        new (): HTMLScopedChildElement;
+    };
+    interface HTMLSlotParentElement extends Components.SlotParent, HTMLStencilElement {
     }
-    var HTMLExampleInputElement: {
-        prototype: HTMLExampleInputElement;
-        new (): HTMLExampleInputElement;
+    var HTMLSlotParentElement: {
+        prototype: HTMLSlotParentElement;
+        new (): HTMLSlotParentElement;
     };
     interface HTMLElementTagNameMap {
-        "example-input": HTMLExampleInputElement;
+        "scoped-child": HTMLScopedChildElement;
+        "slot-parent": HTMLSlotParentElement;
     }
 }
 declare namespace LocalJSX {
-    interface ExampleInput {
-        /**
-          * Whether the input is disabled
-          * @default false
-         */
-        "disabled"?: boolean;
-        /**
-          * Emitted when the input loses focus
-         */
-        "onExampleBlur"?: (event: ExampleInputCustomEvent<void>) => void;
-        /**
-          * Emitted when the value changes
-         */
-        "onExampleChange"?: (event: ExampleInputCustomEvent<string>) => void;
-        /**
-          * Emitted when the input receives focus
-         */
-        "onExampleFocus"?: (event: ExampleInputCustomEvent<void>) => void;
-        /**
-          * Placeholder text for the input
-          * @default ''
-         */
-        "placeholder"?: string;
-        /**
-          * The current value of the input
-          * @default ''
-         */
-        "value"?: string;
+    interface ScopedChild {
+    }
+    interface SlotParent {
     }
     interface IntrinsicElements {
-        "example-input": ExampleInput;
+        "scoped-child": ScopedChild;
+        "slot-parent": SlotParent;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "example-input": LocalJSX.ExampleInput & JSXBase.HTMLAttributes<HTMLExampleInputElement>;
+            "scoped-child": LocalJSX.IntrinsicElements["scoped-child"] & JSXBase.HTMLAttributes<HTMLScopedChildElement>;
+            "slot-parent": LocalJSX.IntrinsicElements["slot-parent"] & JSXBase.HTMLAttributes<HTMLSlotParentElement>;
         }
     }
 }

@@ -11,9 +11,7 @@ export const config: Config = {
       outDir: '../stencil-lib-react/src',
       hydrateModule: '@example/stencil-lib/hydrate',
       clientModule: '@example/stencil-lib-react',
-      serializeShadowRoot: {
-        default: 'declarative-shadow-dom',
-      },
+      serializeShadowRoot: 'scoped',
     }),
     {
       type: 'dist',

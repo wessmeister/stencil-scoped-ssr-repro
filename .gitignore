@@ -6,3 +6,4 @@ loader
 *.log
 hydrate
 .stencil
+*.tsbuildinfo

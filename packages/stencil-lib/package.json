@@ -27,6 +27,10 @@
       "require": "./loader/index.js",
       "default": "./loader/index.js"
     },
+    "./dist/components": {
+      "types": "./dist/components/index.d.ts",
+      "import": "./dist/components/index.js"
+    },
     "./dist/components/*.js": {
       "types": "./dist/components/*.d.ts",
       "import": "./dist/components/*.js"
@@ -49,7 +53,7 @@
     "generate": "stencil generate"
   },
   "devDependencies": {
-    "@stencil/core": "latest",
-    "@stencil/react-output-target": "latest"
+    "@stencil/core": "4.45.1",
+    "@stencil/react-output-target": "1.6.2"
   }
 }

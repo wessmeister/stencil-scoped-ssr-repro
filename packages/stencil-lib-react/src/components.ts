@@ -7,27 +7,32 @@
 
 /* eslint-disable */
 
-import { type ExampleInputCustomEvent } from "@example/stencil-lib";
-import { ExampleInput as ExampleInputElement, defineCustomElement as defineExampleInput } from "@example/stencil-lib/dist/components/example-input.js";
-import type { EventName, StencilReactComponent } from '@stencil/react-output-target/runtime';
+import type { StencilReactComponent } from '@stencil/react-output-target/runtime';
 import { createComponent } from '@stencil/react-output-target/runtime';
 import React from 'react';
 
-export type ExampleInputEvents = {
-    onExampleChange: EventName<ExampleInputCustomEvent<string>>,
-    onExampleFocus: EventName<ExampleInputCustomEvent<void>>,
-    onExampleBlur: EventName<ExampleInputCustomEvent<void>>
-};
+import type { Components } from "@example/stencil-lib/dist/components";
+import { ScopedChild as ScopedChildElement, defineCustomElement as defineScopedChild } from "@example/stencil-lib/dist/components/scoped-child.js";
+import { SlotParent as SlotParentElement, defineCustomElement as defineSlotParent } from "@example/stencil-lib/dist/components/slot-parent.js";
 
-export const ExampleInput: StencilReactComponent<ExampleInputElement, ExampleInputEvents> = /*@__PURE__*/ createComponent<ExampleInputElement, ExampleInputEvents>({
-    tagName: 'example-input',
-    elementClass: ExampleInputElement,
+export type ScopedChildEvents = NonNullable<unknown>;
+
+export const ScopedChild: StencilReactComponent<ScopedChildElement, ScopedChildEvents, Components.ScopedChild> = /*@__PURE__*/ createComponent<ScopedChildElement, ScopedChildEvents, Components.ScopedChild>({
+    tagName: 'scoped-child',
+    elementClass: ScopedChildElement,
     // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
     react: React,
-    events: {
-        onExampleChange: 'exampleChange',
-        onExampleFocus: 'exampleFocus',
-        onExampleBlur: 'exampleBlur'
-    } as ExampleInputEvents,
-    defineCustomElement: defineExampleInput
+    events: {} as ScopedChildEvents,
+    defineCustomElement: defineScopedChild
+});
+
+export type SlotParentEvents = NonNullable<unknown>;
+
+export const SlotParent: StencilReactComponent<SlotParentElement, SlotParentEvents, Components.SlotParent> = /*@__PURE__*/ createComponent<SlotParentElement, SlotParentEvents, Components.SlotParent>({
+    tagName: 'slot-parent',
+    elementClass: SlotParentElement,
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
+    react: React,
+    events: {} as SlotParentEvents,
+    defineCustomElement: defineSlotParent
 });
