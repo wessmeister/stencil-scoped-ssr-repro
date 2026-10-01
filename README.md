@@ -1,9 +1,14 @@
-# Scoped SSR drops a nested component and adjacent text
+# Scoped SSR and hydration reproduction
 
 Minimal reproduction for `@stencil/react-output-target` **1.6.2**, based on
 [johnjenkins/stencil-starter-next](https://github.com/johnjenkins/stencil-starter-next/tree/8f84a23a6a32e94b02848ebbec149baedebc7e1f).
 It retains the starter's three-package structure and uses Stencil **4.45.1**,
 React **19.2.3**, and Next.js **15.5.9** (App Router).
+
+The default route reproduces missing server content. `/server-component` checks
+direct Server Component composition and `/state-update` checks React updates.
+The dependency pins use published releases; instructions for testing the
+proposed fixes are below.
 
 ## Run
 
@@ -71,3 +76,26 @@ http://localhost:3001/parent-first registers the parent first for comparison
 and preserves the expected order. This is a diagnostic, not a recommended
 workaround. This client-side failure is independent of the React adapter's
 server-content loss.
+
+## Verify the proposed fixes
+
+Build and pack [core #6927](https://github.com/stenciljs/core/pull/6927) and
+[output-targets #853](https://github.com/stenciljs/output-targets/pull/853) in
+their respective checkouts, following their contribution instructions. After
+the frozen install above, replace the released packages with those tarballs:
+
+```sh
+pnpm --filter @example/stencil-lib add --save-dev /path/to/stencil-core-4.45.1.tgz /path/to/stencil-react-output-target-1.6.2.tgz
+pnpm --filter @example/stencil-lib-react add /path/to/stencil-react-output-target-1.6.2.tgz
+pnpm start
+```
+
+With both proposed changes, `/`, `/server-component` and `/state-update` should
+preserve the child and separating space without a hydration error on direct
+load or refresh. On `/state-update`, **Update text** should change only the
+trailing text. The original host and child elements should remain in place.
+
+The production commands above exercise the same routes. Those routes were
+verified with locally built patches in Chromium, Firefox and WebKit. The raw
+Stencil control also preserved both definition orders in Chromium. The fixes
+are not present in the pinned published releases.
